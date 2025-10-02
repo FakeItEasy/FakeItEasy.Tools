@@ -5,9 +5,9 @@ inputs:
   artifact-name:
     required: true
     description: "Name of the artifact to deploy"
-  nuget-api-key:
+  nuget-user:
     required: true
-    description: "NuGet API key to publish the package"
+    description: "NuGet user name to publish the package"
   docs-output-prefix:
     required: true
     description: "Path prefix where the docs will be generated"
@@ -26,12 +26,17 @@ runs:
     with:
       name: ${{ inputs.artifact-name }}
       path: /tmp/artifacts
+  - name: NuGet login
+    uses: NuGet/login@v1
+    id: nuget-login
+    with:
+      user: ${{ inputs.nuget-user }}
   - name: Deploy
     shell: bash
     env:
       GH_TOKEN: ${{ inputs.github-token }}
       NUGET_SERVER_URL: https://www.nuget.org/
-      NUGET_API_KEY: ${{ inputs.nuget-api-key }}
+      NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
     run: |
       if [[ "${{ inputs.dry-run }}" == "true" ]]; then
         DRY_RUN_OPTION=--dry-run
