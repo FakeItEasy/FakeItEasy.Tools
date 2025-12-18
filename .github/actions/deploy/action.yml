@@ -42,7 +42,17 @@ runs:
         DRY_RUN_OPTION=--dry-run
       fi
       dotnet run --project tools-shared/FakeItEasy.Deploy -- $DRY_RUN_OPTION -r "${{ github.repository }}" -t "${{ github.ref_name }}" -a "/tmp/artifacts/output"
+  - name: Detect if pre-release tag
+    id: detect-prerelease
+    run: |
+      TAG_NAME="${{ github.ref_name }}"
+      if [[ "$TAG_NAME" == *-* ]]; then
+        echo "is-prerelease=true" >> $GITHUB_OUTPUT
+      else
+        echo "is-prerelease=false" >> $GITHUB_OUTPUT
+      fi
   - name: Trigger docs generation
+    if: steps.detect-prerelease.outputs.is-prerelease == 'false'
     shell: bash
     env:
       GH_TOKEN: ${{ inputs.github-token }}
