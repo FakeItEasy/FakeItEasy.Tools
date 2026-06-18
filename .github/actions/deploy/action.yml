@@ -41,7 +41,7 @@ runs:
       if [[ "${{ inputs.dry-run }}" == "true" ]]; then
         DRY_RUN_OPTION=--dry-run
       fi
-      dotnet run --project tools-shared/FakeItEasy.Deploy -- $DRY_RUN_OPTION -r "${{ github.repository }}" -t "${{ github.ref_name }}" -a "/tmp/artifacts/output"
+      dotnet run tools-shared/Deploy.cs -- $DRY_RUN_OPTION -r "${{ github.repository }}" -t "${{ github.ref_name }}" -a "/tmp/artifacts/output"
   - name: Detect if pre-release tag
     shell: bash
     id: detect-prerelease
