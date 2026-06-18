@@ -1,12 +1,10 @@
-namespace FakeItEasy.Tools;
+using static ToolHelpers;
 
-using static FakeItEasy.Tools.ToolHelpers;
-
-public static class GitHubTokenSource
+internal static class GitHubTokenSource
 {
     public static string GetAccessToken()
     {
-        var tokenFilePath = Path.Combine(GetCurrentScriptDirectory(), ".githubtoken");
+        var tokenFilePath = Path.Combine(GetCurrentScriptDirectory(), "..", ".githubtoken");
         var token = Environment.GetEnvironmentVariable("GH_TOKEN");
         if (string.IsNullOrEmpty(token))
         {

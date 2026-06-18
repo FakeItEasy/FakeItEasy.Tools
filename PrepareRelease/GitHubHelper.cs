@@ -1,7 +1,7 @@
-﻿namespace FakeItEasy.PrepareRelease;
+namespace FakeItEasy.PrepareRelease;
 
 using Octokit;
-using static FakeItEasy.Tools.ReleaseHelpers;
+using static ReleaseHelpers;
 
 internal sealed class GitHubHelper
 {

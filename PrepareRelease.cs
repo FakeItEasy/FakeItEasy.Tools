@@ -1,7 +1,14 @@
+#!/usr/bin/env dotnet
+
+#:package Octokit@$(OctokitVersion)
+#:include ./Common/GitHubTokenSource.cs
+#:include ./Common/ReleaseHelpers.cs
+#:include ./Common/ToolHelpers.cs
+#:include ./PrepareRelease/GitHubHelper.cs
+
 using FakeItEasy.PrepareRelease;
-using FakeItEasy.Tools;
 using Octokit;
-using static FakeItEasy.Tools.ReleaseHelpers;
+using static ReleaseHelpers;
 
 if (args.Length != 4 || (args[1] != "next" && args[1] != "fork"))
 {

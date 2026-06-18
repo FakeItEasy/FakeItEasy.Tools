@@ -1,7 +1,15 @@
+#!/usr/bin/env dotnet
+
+#:package Octokit@$(OctokitVersion)
+#:package SimpleExec@$(SimpleExecVersion)
+#:include ./Common/GitHubTokenSource.cs
+#:include ./Common/ReleaseHelpers.cs
+#:include ./Common/ToolHelpers.cs
+#:include ./Deploy/CommandLineOptions.cs
+
 using FakeItEasy.Deploy;
-using FakeItEasy.Tools;
 using Octokit;
-using static FakeItEasy.Tools.ReleaseHelpers;
+using static ReleaseHelpers;
 using static SimpleExec.Command;
 
 var options = CommandLineOptions.Parse(args);

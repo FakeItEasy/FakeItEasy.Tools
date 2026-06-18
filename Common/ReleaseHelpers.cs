@@ -1,5 +1,3 @@
-namespace FakeItEasy.Tools;
-
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Octokit;
